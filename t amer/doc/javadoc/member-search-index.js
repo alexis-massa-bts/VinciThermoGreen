@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"view","c":"ConsoleGUI","l":"ConsoleGUI()","url":"%3Cinit%3E()"},{"p":"view","c":"ConsoleGUI","l":"main(String[])","url":"main(java.lang.String[])"},{"p":"view","c":"ConsoleGUI","l":"setChart()"}]
