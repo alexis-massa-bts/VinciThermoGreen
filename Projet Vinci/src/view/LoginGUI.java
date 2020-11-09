@@ -5,17 +5,21 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 
-import control.Controller;
+import control.ControllerConsole;
+import control.ControllerLogin;
 
 import javax.swing.JButton;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class LoginGUI extends JFrame {
 
 	private JTextField tfLogin;
 	private JTextField tfPassword;
+
+	private static ControllerLogin control;
 
 	private String login;
 	private String password;
@@ -52,8 +56,21 @@ public class LoginGUI extends JFrame {
 				// TODO action bouton valider
 				login = tfLogin.getText();
 				password = tfPassword.getText();
+				
+				try {
+					if(!control.verifyLogin(login, password)){
+						//Connection refusée
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
+
+		// Instancie un contrôleur pour prendre en charge le login
+		control = new ControllerLogin();
+		System.out.println("création controlleur login");
 
 	}
 

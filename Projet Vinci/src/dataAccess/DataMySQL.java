@@ -77,8 +77,10 @@ public class DataMySQL {
 		DataMySQL.user = user;
 	}
 
-	public static String getPassword() {
-		return password;
+	public static ResultSet getPassword(String login) throws SQLException {
+		myStmt = myConn.createStatement();
+		myRs = myStmt.executeQuery("select login, password from user");
+		return myRs;
 	}
 
 	public static void setPassword(String password) {
@@ -136,5 +138,12 @@ public class DataMySQL {
 		
 		return myRs;
 	}
+	
+	public static ResultSet getAllUsers() throws SQLException {
+		myStmt = myConn.createStatement();
+		myRs = myStmt.executeQuery("select login, password from user");
+		return myRs;
+	}
+
 
 }

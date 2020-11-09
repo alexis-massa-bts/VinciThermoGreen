@@ -1,5 +1,11 @@
 package model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Scanner;
+
+import dataAccess.DataMySQL;
+
 public class User {
 	private String login;
 	private String password;
@@ -37,4 +43,7 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+		
+
+	
 }

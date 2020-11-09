@@ -38,12 +38,12 @@ import view.ConsoleGUI;
  * @version 2.0.0
  *
  */
-public class Controller {
+public class ControllerConsole {
 
 	private ArrayList<Mesure> allData = new ArrayList<Mesure>();
 	private ArrayList<String> allStadiums = new ArrayList<String>();
 
-	public Controller() throws ParseException, SQLException {
+	public ControllerConsole() throws ParseException, SQLException {
 		DataMySQL.openConnection();
 		updateData("Stade de Paris");
 	}

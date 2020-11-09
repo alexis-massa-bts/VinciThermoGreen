@@ -52,14 +52,14 @@ import java.sql.*;
  * 
  * @author Jérôme Valenti
  * @version 2.0.0
- * @see control.Controller
+ * @see control.ControllerConsole
  * @see model.Mesure
  */
 public class ConsoleGUI extends JFrame {
 
 	private static ArrayList<String> allStadiums;
 
-	private static Controller control;
+	private static ControllerConsole control;
 	/**
 	 * <p>
 	 * Container intermédiaire JPanel
@@ -423,46 +423,38 @@ public class ConsoleGUI extends JFrame {
 		});
 
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\uti311\\Documents\\LocalRepository\\VinciThermoGreen\\img\\Logo_Vinci_Concessions.gif"));
+		lblNewLabel.setIcon(new ImageIcon(
+				"C:\\Users\\uti311\\Documents\\LocalRepository\\VinciThermoGreen\\img\\Logo_Vinci_Concessions.gif"));
 		lblNewLabel.setBounds(10, 25, 250, 90);
 		getContentPane().add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\uti311\\Documents\\LocalRepository\\VinciThermoGreen\\img\\userIcon.png"));
+		lblNewLabel_1.setIcon(
+				new ImageIcon("C:\\Users\\uti311\\Documents\\LocalRepository\\VinciThermoGreen\\img\\userIcon.png"));
 		lblNewLabel_1.setBounds(569, 7, 126, 126);
 		getContentPane().add(lblNewLabel_1);
 	}
 
-	
 	public static void main(String[] args) throws ParseException, SQLException {
-		
-		
 
 		// Instancie un contrôleur pour prendre en charge l'IHM
-		control = new Controller();
-		System.out.println("création controlleur");
+		control = new ControllerConsole();
+		System.out.println("création controlleur console");
+
 		// Gestion de la connexion
 		// Construit l'IHM de connexion
 		LoginGUI monLogin = new LoginGUI();
 		monLogin.setLocation(100, 100);
-		
-		
+		monLogin.setSize(715, 660);
 
 		// show loginGUI
-		//monLogin.setVisible(true);
+		monLogin.setVisible(true);
 		System.out.println("Affichage de monLogin");
 		// Tentative connexion
-		
+
 		// Connexion réussie
-		//monLogin.setVisible(false);
+		// monLogin.setVisible(false);
 
-
-		
-		
-		
-		
-		
-		
 		// Gestion des mesures
 		// Construit l'IHM de lecture des mesures
 		ConsoleGUI monIHM = new ConsoleGUI();
@@ -484,7 +476,7 @@ public class ConsoleGUI extends JFrame {
 		monIHM.setChart();
 
 		// show consoleGUI
-		monIHM.setVisible(true);
+		// monIHM.setVisible(true);
 		System.out.println("Affichage monIHM false");
 	}
 
