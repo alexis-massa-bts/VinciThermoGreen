@@ -76,11 +76,23 @@ public class DataMySQL {
 	public static void setUser(String user) {
 		DataMySQL.user = user;
 	}
+	
+	public static String getPassword() {
+		return password;
+	}
 
-	public static ResultSet getPassword(String login) throws SQLException {
+	/**
+	 * Returns the login of the entered user
+	 * @param login
+	 * @return password
+	 * @throws SQLException
+	 */	
+	public static String getPassword(String login) throws SQLException {
 		myStmt = myConn.createStatement();
-		myRs = myStmt.executeQuery("select login, password from user");
-		return myRs;
+		myRs = myStmt.executeQuery("select password from user where login = '" + login +  "';");
+		myRs.next();
+		String password = myRs.getString(1);
+		return password;
 	}
 
 	public static void setPassword(String password) {
@@ -141,7 +153,7 @@ public class DataMySQL {
 	
 	public static ResultSet getAllUsers() throws SQLException {
 		myStmt = myConn.createStatement();
-		myRs = myStmt.executeQuery("select login, password from user");
+		myRs = myStmt.executeQuery("select * from user");
 		return myRs;
 	}
 

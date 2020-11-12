@@ -1,3 +1,6 @@
+/**
+ * @author Alexis Massa
+ */
 package model;
 
 import java.sql.ResultSet;

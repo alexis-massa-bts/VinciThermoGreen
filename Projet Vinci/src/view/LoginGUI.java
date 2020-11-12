@@ -7,12 +7,16 @@ import javax.swing.JTextField;
 
 import control.ControllerConsole;
 import control.ControllerLogin;
+import dataAccess.DataMySQL;
 
 import javax.swing.JButton;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.SQLException;
+import java.awt.event.MouseAdapter;
 
 public class LoginGUI extends JFrame {
 
@@ -21,8 +25,8 @@ public class LoginGUI extends JFrame {
 
 	private static ControllerLogin control;
 
-	private String login;
-	private String password;
+	private static String login;
+	private static String password;
 
 	public LoginGUI() {
 
@@ -49,29 +53,26 @@ public class LoginGUI extends JFrame {
 		panel.add(labelPassword);
 
 		JButton btnValider = new JButton("Valider");
-		btnValider.setBounds(345, 249, 89, 23);
-		panel.add(btnValider);
-		btnValider.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// TODO action bouton valider
+		btnValider.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// Action bouton valider
 				login = tfLogin.getText();
 				password = tfPassword.getText();
-				
-				try {
-					if(!control.verifyLogin(login, password)){
-						//Connection refusée
-					}
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 			}
 		});
+		btnValider.setBounds(345, 249, 89, 23);
+		panel.add(btnValider);
 
 		// Instancie un contrôleur pour prendre en charge le login
 		control = new ControllerLogin();
 		System.out.println("création controlleur login");
 
+	}
+	
+	public boolean verifyLogin() throws SQLException {
+		System.out.println(login + " " + password);
+		return control.verifyLogin(login, password);
 	}
 
 	public JTextField getTfLogin() {

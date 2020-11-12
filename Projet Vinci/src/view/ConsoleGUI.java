@@ -440,27 +440,42 @@ public class ConsoleGUI extends JFrame {
 		// Instancie un contrôleur pour prendre en charge l'IHM
 		control = new ControllerConsole();
 		System.out.println("création controlleur console");
+		
 
 		// Gestion de la connexion
 		// Construit l'IHM de connexion
 		LoginGUI monLogin = new LoginGUI();
 		monLogin.setLocation(100, 100);
 		monLogin.setSize(715, 660);
+		
+		// Construit l'IHM de lecture des mesures
+				ConsoleGUI monIHM = new ConsoleGUI();
+				monIHM.setLocation(100, 100);
+				System.out.println("Création IHM");
 
 		// show loginGUI
 		monLogin.setVisible(true);
 		System.out.println("Affichage de monLogin");
+		
+		
 		// Tentative connexion
-
-		// Connexion réussie
-		// monLogin.setVisible(false);
+		boolean authorized = true;
+		while(authorized) {
+			if(monLogin.verifyLogin()) {
+				System.out.println("3");
+				// Connexion réussie
+				// hide loginGUI
+				monLogin.setVisible(false);
+				// show consoleGUI
+				monIHM.setVisible(true);
+				authorized = false;
+			}
+		}
+		
+		
 
 		// Gestion des mesures
-		// Construit l'IHM de lecture des mesures
-		ConsoleGUI monIHM = new ConsoleGUI();
-		monIHM.setLocation(100, 100);
-		System.out.println("Création IHM");
-
+		
 		// Demande l'acquisition des data
 		// uneMesure = new Mesure();
 		lesMesures = control.getLesMesures();
@@ -470,14 +485,8 @@ public class ConsoleGUI extends JFrame {
 
 		// Definit le JScrollPane qui va recevoir la JTable
 		scrollPane.setViewportView(laTable);
-
-		// System.out.println("Before set chart in main()");
 		// affiche le graphique
 		monIHM.setChart();
-
-		// show consoleGUI
-		// monIHM.setVisible(true);
-		System.out.println("Affichage monIHM false");
 	}
 
 	/**

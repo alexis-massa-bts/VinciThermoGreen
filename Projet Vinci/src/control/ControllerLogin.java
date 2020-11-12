@@ -7,18 +7,29 @@ import dataAccess.DataMySQL;
 
 public class ControllerLogin {
 
-	public static boolean verifyLogin(String login, String password) throws SQLException {
-		boolean found = false;
-		String tmpUsername = "";
+	public boolean verifyLogin(String login, String password) throws SQLException {
+		boolean correct = false;
 		String tmpPassword = "";
-		ResultSet allUsers = DataMySQL.getAllUsers();
 		try {
-			//TODO login
-			System.out.println(login + " " +  password);
+			// TODO login
+			tmpPassword = DataMySQL.getPassword(login);		
+			
+			System.out.println((password instanceof String) + " : " + (tmpPassword instanceof String));
+			System.out.println(password + " : " + tmpPassword);
+			//TODO j'en suis la
+			System.out.println("ALED");
+			
+			if (tmpPassword == password) {
+				correct = true;
+			}else {
+				correct = false;
+			}
+
 		} catch (Exception e) {
 
 		}
-		return found;
+		System.out.println(correct);
+		return correct;
 
 	}
 }
