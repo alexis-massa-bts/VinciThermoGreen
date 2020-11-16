@@ -5,8 +5,6 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 
-import control.ControllerConsole;
-import control.ControllerLogin;
 import dataAccess.DataMySQL;
 
 import javax.swing.JButton;
@@ -22,8 +20,6 @@ public class LoginGUI extends JFrame {
 
 	private JTextField tfLogin;
 	private JTextField tfPassword;
-
-	private static ControllerLogin control;
 
 	private static String login;
 	private static String password;
@@ -64,15 +60,6 @@ public class LoginGUI extends JFrame {
 		btnValider.setBounds(345, 249, 89, 23);
 		panel.add(btnValider);
 
-		// Instancie un contrôleur pour prendre en charge le login
-		control = new ControllerLogin();
-		System.out.println("création controlleur login");
-
-	}
-	
-	public boolean verifyLogin() throws SQLException {
-		System.out.println(login + " " + password);
-		return control.verifyLogin(login, password);
 	}
 
 	public JTextField getTfLogin() {
@@ -81,6 +68,32 @@ public class LoginGUI extends JFrame {
 
 	public JTextField getTfPassword() {
 		return tfPassword;
+	}
+
+	public boolean verifyLogin(String password) throws SQLException {
+		boolean correct = false;
+		String tmpPassword = "";
+		try {
+			// TODO login
+			tmpPassword = DataMySQL.getPassword(login);
+
+			System.out.println((password instanceof String) + " : " + (tmpPassword instanceof String));
+			System.out.println(password + " : " + tmpPassword);
+			// TODO j'en suis la
+			System.out.println("ALED");
+
+			if (tmpPassword == password) {
+				correct = true;
+			} else {
+				correct = false;
+			}
+
+		} catch (Exception e) {
+
+		}
+		System.out.println(correct);
+		return correct;
+
 	}
 
 }

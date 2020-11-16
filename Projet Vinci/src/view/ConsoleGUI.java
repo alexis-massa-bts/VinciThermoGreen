@@ -11,8 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.ListIterator;
 
 import javax.swing.ButtonGroup;
@@ -57,9 +59,9 @@ import java.sql.*;
  */
 public class ConsoleGUI extends JFrame {
 
-	private static ArrayList<String> allStadiums;
+	private static ArrayList<Mesure> allData = new ArrayList<Mesure>();
+	private static ArrayList<String> allStadiums = new ArrayList<String>();
 
-	private static ControllerConsole control;
 	/**
 	 * <p>
 	 * Container intermédiaire JPanel
@@ -397,7 +399,7 @@ public class ConsoleGUI extends JFrame {
 		/*
 		 * Get list of stadiums from controller
 		 */
-		allStadiums = control.getAllStadiums();
+		allStadiums = getAllStadiums();
 
 		JComboBox<String> stadeChoix = new JComboBox();
 		stadeChoix.setBounds(299, 40, 228, 61);
@@ -411,7 +413,7 @@ public class ConsoleGUI extends JFrame {
 		stadeChoix.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					control.updateData((String) stadeChoix.getSelectedItem());
+					updateData((String) stadeChoix.getSelectedItem());
 					// displayLesMesures(lesMesures);
 					laTable = setTable(lesMesures);
 					scrollPane.setViewportView(laTable);
@@ -435,50 +437,40 @@ public class ConsoleGUI extends JFrame {
 		getContentPane().add(lblNewLabel_1);
 	}
 
-	public static void main(String[] args) throws ParseException, SQLException {
-
-		// Instancie un contrôleur pour prendre en charge l'IHM
-		control = new ControllerConsole();
-		System.out.println("création controlleur console");
-		
+	public static void startup() {
 
 		// Gestion de la connexion
 		// Construit l'IHM de connexion
 		LoginGUI monLogin = new LoginGUI();
 		monLogin.setLocation(100, 100);
 		monLogin.setSize(715, 660);
-		
-		// Construit l'IHM de lecture des mesures
-				ConsoleGUI monIHM = new ConsoleGUI();
-				monIHM.setLocation(100, 100);
-				System.out.println("Création IHM");
+
+		monIHM.setLocation(100, 100);
+		System.out.println("Création IHM");
 
 		// show loginGUI
 		monLogin.setVisible(true);
 		System.out.println("Affichage de monLogin");
-		
-		
+
 		// Tentative connexion
 		boolean authorized = true;
-		while(authorized) {
-			if(monLogin.verifyLogin()) {
-				System.out.println("3");
-				// Connexion réussie
-				// hide loginGUI
-				monLogin.setVisible(false);
-				// show consoleGUI
-				monIHM.setVisible(true);
-				authorized = false;
-			}
-		}
-		
-		
+//		while (authorized) {
+//			if (monLogin.verifyLogin()) {
+//				System.out.println("3");
+//				// Connexion réussie
+//				// hide loginGUI
+//				monLogin.setVisible(false);
+//				// show consoleGUI
+//				monIHM.setVisible(true);
+//				authorized = false;
+//			}
+//		}
 
 		// Gestion des mesures
-		
+
 		// Demande l'acquisition des data
 		// uneMesure = new Mesure();
-		lesMesures = control.getLesMesures();
+		lesMesures = getLesMesures();
 
 		// Construit le tableau d'objet
 		// laTable = setTable(lesMesures);
@@ -487,6 +479,7 @@ public class ConsoleGUI extends JFrame {
 		scrollPane.setViewportView(laTable);
 		// affiche le graphique
 		monIHM.setChart();
+
 	}
 
 	/**
@@ -674,7 +667,7 @@ public class ConsoleGUI extends JFrame {
 	class filtrerData implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 
-			lesMesures = control.filtrerLesMesure(choixZone.getSelectedItem().toString());
+			lesMesures = filtrerLesMesure(choixZone.getSelectedItem().toString());
 //			System.out.println(
 //					"Filtrer Celsius : " + rdbtnCelsius.isSelected() + " Fahrenheit : " + rdbtnFahrenheit.isSelected()
 //							+ " choix : " + choixZone.getSelectedItem() + " début : " + dateDebut.getText());
@@ -704,6 +697,94 @@ public class ConsoleGUI extends JFrame {
 			System.out.println(i + " " + uneCollection.get(i).getNumZone() + " | " + uneCollection.get(i).getHoroDate()
 					+ " | " + uneCollection.get(i).getCelsius());
 		}
+	}
+
+	public void updateData(String selectedStadium) throws ParseException, SQLException {
+
+		// Chaque ligne est un enregistrement de données
+		// Chaque enregistrement contient des champs
+		String[] fields = null;
+		String numZone = null;
+		Date horoDate = null;
+		float fahrenheit;
+		// Clear all datas
+		allData.clear();
+		// Traitement les champs de la requête
+		ResultSet myRs = DataMySQL.getAllData(selectedStadium);
+
+		while (myRs.next()) {
+			Mesure laMesure = new Mesure();
+			laMesure.setNumZone(myRs.getString(1));
+			laMesure.setHoroDate(myRs.getDate(2));
+			laMesure.setFahrenheit(myRs.getFloat(3));
+
+			allData.add(laMesure);
+		}
+
+	}
+
+	/**
+	 * Filtrage des données en fonction de la zone selectionnée
+	 * 
+	 * @param laZone
+	 * @return ArrayList<Mesure> laSelection
+	 */
+	public ArrayList<Mesure> filtrerLesMesure(String laZone) {
+		// Parcours de la collection
+		// Ajout à laSelection des objets qui correspondent aux paramètres
+		// Envoi de la collection
+		ArrayList<Mesure> laSelection = new ArrayList<Mesure>();
+		for (Mesure mesure : allData) {
+			if (laZone.compareTo("*") == 0) {
+				laSelection.add(mesure);
+			} else {
+				if (laZone.compareTo(mesure.getNumZone()) == 0) {
+					laSelection.add(mesure);
+				}
+			}
+		}
+		return laSelection;
+	}
+
+	/**
+	 * <p>
+	 * Retourne la collection des mesures
+	 * </p>
+	 * 
+	 * @return ArrayList<Mesure>
+	 */
+	public static ArrayList<Mesure> getLesMesures() {
+		return allData;
+	}
+
+	/**
+	 * <p>
+	 * Convertion d'une String en Date
+	 * </p>
+	 * 
+	 * @param strDate
+	 * @return Date
+	 * @throws ParseException
+	 */
+	private Date strToDate(String strDate) throws ParseException {
+
+		SimpleDateFormat leFormat = null;
+		Date laDate = new Date();
+		leFormat = new SimpleDateFormat("yy-MM-dd hh:mm");
+
+		laDate = leFormat.parse(strDate);
+		return laDate;
+	}
+
+	/**
+	 * Renvoie la liste des stades
+	 * 
+	 * @return ArrayList of stadiums
+	 * @throws SQLException
+	 */
+	public ArrayList<String> getAllStadiums() throws SQLException {
+		allStadiums = DataMySQL.getAllStadiums();
+		return allStadiums;
 	}
 
 }
