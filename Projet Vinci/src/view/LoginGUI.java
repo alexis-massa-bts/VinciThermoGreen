@@ -62,6 +62,13 @@ public class LoginGUI extends JFrame {
 
 	}
 
+	public void setUp(LoginGUI login) {
+		// Gestion de la connexion
+		// Construit l'IHM de connexion
+		login.setLocation(100, 100);
+		login.setSize(715, 660);
+	}
+
 	public JTextField getTfLogin() {
 		return tfLogin;
 	}
@@ -70,17 +77,17 @@ public class LoginGUI extends JFrame {
 		return tfPassword;
 	}
 
-	public boolean verifyLogin(String password) throws SQLException {
+	public boolean verifyLogin() throws SQLException {
 		boolean correct = false;
 		String tmpPassword = "";
+		String password = "";
 		try {
 			// TODO login
 			tmpPassword = DataMySQL.getPassword(login);
+			password = getTfPassword().toString();
 
 			System.out.println((password instanceof String) + " : " + (tmpPassword instanceof String));
 			System.out.println(password + " : " + tmpPassword);
-			// TODO j'en suis la
-			System.out.println("ALED");
 
 			if (tmpPassword == password) {
 				correct = true;

@@ -437,35 +437,8 @@ public class ConsoleGUI extends JFrame {
 		getContentPane().add(lblNewLabel_1);
 	}
 
-	public static void startup() {
-
-		// Gestion de la connexion
-		// Construit l'IHM de connexion
-		LoginGUI monLogin = new LoginGUI();
-		monLogin.setLocation(100, 100);
-		monLogin.setSize(715, 660);
-
-		monIHM.setLocation(100, 100);
-		System.out.println("Création IHM");
-
-		// show loginGUI
-		monLogin.setVisible(true);
-		System.out.println("Affichage de monLogin");
-
-		// Tentative connexion
-		boolean authorized = true;
-//		while (authorized) {
-//			if (monLogin.verifyLogin()) {
-//				System.out.println("3");
-//				// Connexion réussie
-//				// hide loginGUI
-//				monLogin.setVisible(false);
-//				// show consoleGUI
-//				monIHM.setVisible(true);
-//				authorized = false;
-//			}
-//		}
-
+	public void setUp(ConsoleGUI console) throws ParseException, SQLException {
+		console.updateData("Stade de Paris");
 		// Gestion des mesures
 
 		// Demande l'acquisition des data
@@ -478,8 +451,10 @@ public class ConsoleGUI extends JFrame {
 		// Definit le JScrollPane qui va recevoir la JTable
 		scrollPane.setViewportView(laTable);
 		// affiche le graphique
-		monIHM.setChart();
-
+		console.setChart();
+		
+		console.setLocation(100, 100);
+		System.out.println("Création IHM");
 	}
 
 	/**
