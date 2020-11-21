@@ -437,12 +437,17 @@ public class ConsoleGUI extends JFrame {
 		getContentPane().add(lblNewLabel_1);
 	}
 
-	public void setUp(ConsoleGUI console) throws ParseException, SQLException {
+	/**
+	 * Préparation de ConsoleGUI
+	 * @param console
+	 * @throws ParseException
+	 * @throws SQLException
+	 */
+	public void setUp(ConsoleGUI console) throws ParseException, SQLException{
 		console.updateData("Stade de Paris");
 		// Gestion des mesures
 
 		// Demande l'acquisition des data
-		// uneMesure = new Mesure();
 		lesMesures = getLesMesures();
 
 		// Construit le tableau d'objet
@@ -455,6 +460,7 @@ public class ConsoleGUI extends JFrame {
 		
 		console.setLocation(100, 100);
 		System.out.println("Création IHM");
+		setVisible(true);
 	}
 
 	/**

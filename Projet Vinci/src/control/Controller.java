@@ -9,35 +9,42 @@ import view.LoginGUI;
 
 public class Controller {
 
-	private static ConsoleGUI console;
 	private static LoginGUI login;
-
+	/**
+	 * MAIN de l'application
+	 * @param args
+	 * @throws ParseException
+	 * @throws SQLException
+	 */
 	public static void main(String[] args) throws ParseException, SQLException {
 		DataMySQL.openConnection();
 
 		login = new LoginGUI();
 		login.setUp(login);
-
-		console = new ConsoleGUI();
-		console.setUp(console);
-		
-		// show loginGUI
-		login.setVisible(true);
-		System.out.println("Affichage de monLogin");
-
-		// Tentative connexion
-		boolean authorized = true;
-		while (authorized) {
-			if (login.verifyLogin()) {
-				// Connexion réussie
-				// hide loginGUI
-				login.setVisible(false);
-				// show consoleGUI
-				login.setVisible(true);
-				authorized = false;
+	}
+	
+	/**
+	 * Vérifier la connection
+	 * @param login
+	 * @param password
+	 * @return
+	 * @throws SQLException
+	 */
+	public boolean verifyLogin(String login, String password) throws SQLException {
+		boolean correct = false;
+		String tmpPassword = "";
+		try {
+			tmpPassword = DataMySQL.getPassword(login);
+			if (tmpPassword.compareTo(password) == 0) {
+				correct = true;
+			} else {
+				correct = false;
 			}
-		}
 
+		} catch (Exception e) {
+
+		}
+		return correct;
 
 	}
 

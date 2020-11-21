@@ -5,16 +5,14 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 
-import dataAccess.DataMySQL;
-
 import javax.swing.JButton;
 import java.awt.Label;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.awt.event.MouseAdapter;
+
+import control.Controller;
 
 public class LoginGUI extends JFrame {
 
@@ -23,6 +21,8 @@ public class LoginGUI extends JFrame {
 
 	private static String login;
 	private static String password;
+
+	private Controller control = new Controller();
 
 	public LoginGUI() {
 
@@ -51,22 +51,53 @@ public class LoginGUI extends JFrame {
 		JButton btnValider = new JButton("Valider");
 		btnValider.addMouseListener(new MouseAdapter() {
 			@Override
+			/**
+			 * Appui sur le bouton "Valider" du LoginGUI
+			 */
 			public void mouseClicked(MouseEvent e) {
 				// Action bouton valider
 				login = tfLogin.getText();
 				password = tfPassword.getText();
+				try {
+					
+					if (control.verifyLogin(login, password)) {
+						// Connexion réussie
+						// hide loginGUI
+						setVisible(false);
+
+						// Instance console
+						ConsoleGUI console = new ConsoleGUI();
+						console.setUp(console);
+					} else {
+
+					}
+					;
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
 			}
 		});
+		
 		btnValider.setBounds(345, 249, 89, 23);
 		panel.add(btnValider);
 
 	}
 
+	/**
+	 Préparation de LoginGUI
+	 * @param login
+	 */
 	public void setUp(LoginGUI login) {
 		// Gestion de la connexion
 		// Construit l'IHM de connexion
 		login.setLocation(100, 100);
 		login.setSize(715, 660);
+		setVisible(true);
 	}
 
 	public JTextField getTfLogin() {
@@ -76,31 +107,4 @@ public class LoginGUI extends JFrame {
 	public JTextField getTfPassword() {
 		return tfPassword;
 	}
-
-	public boolean verifyLogin() throws SQLException {
-		boolean correct = false;
-		String tmpPassword = "";
-		String password = "";
-		try {
-			// TODO login
-			tmpPassword = DataMySQL.getPassword(login);
-			password = getTfPassword().toString();
-
-			System.out.println((password instanceof String) + " : " + (tmpPassword instanceof String));
-			System.out.println(password + " : " + tmpPassword);
-
-			if (tmpPassword == password) {
-				correct = true;
-			} else {
-				correct = false;
-			}
-
-		} catch (Exception e) {
-
-		}
-		System.out.println(correct);
-		return correct;
-
-	}
-
 }
