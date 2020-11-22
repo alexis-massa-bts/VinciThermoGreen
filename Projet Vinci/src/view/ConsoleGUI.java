@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.PasswordAuthentication;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -61,6 +62,8 @@ public class ConsoleGUI extends JFrame {
 
 	private static ArrayList<Mesure> allData = new ArrayList<Mesure>();
 	private static ArrayList<String> allStadiums = new ArrayList<String>();
+	private Controller control = new Controller();
+	private Admin admin;
 
 	/**
 	 * <p>
@@ -204,12 +207,13 @@ public class ConsoleGUI extends JFrame {
 	 */
 	JPanel pnlBounds = new JPanel();
 
-	public ConsoleGUI() throws ParseException, SQLException {
+	public ConsoleGUI(String username, boolean role) throws ParseException, SQLException {
 		// Appelle le constructeur de la classe mère
 		super();
+		setLocation(-357, -248);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("img\\vinci_ico.jpg"));
 		setTitle("Vinci Thermo Green");
-		setSize(715, 660);
+		setSize(717, 756);
 		setResizable(false);
 		setFont(new Font("Consolas", Font.PLAIN, 12));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -220,7 +224,7 @@ public class ConsoleGUI extends JFrame {
 		getContentPane().setLayout(null);
 
 		// Définit le JPanel des critères
-		pnlCriteria.setBounds(10, 148, 325, 145);
+		pnlCriteria.setBounds(10, 233, 325, 145);
 		pnlCriteria.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Filtrage",
 				TitledBorder.LEADING, TitledBorder.TOP, null, Color.GRAY));
 		pnlCriteria.setBackground(UIManager.getColor("Label.background"));
@@ -291,11 +295,11 @@ public class ConsoleGUI extends JFrame {
 		pnlCriteria.add(lblLogoVinci);
 
 		// Définit le JScrollPane qui reçoit la JTable
-		scrollPane.setBounds(10, 298, 325, 310);
+		scrollPane.setBounds(10, 389, 325, 310);
 		pane.add(scrollPane);
 
 		// Définit le JPanel des paramètres du graphique
-		pnlParam.setBounds(340, 148, 355, 335);
+		pnlParam.setBounds(340, 236, 355, 328);
 		pnlParam.setBorder(
 				new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Graphique des temp\u00E9ratures",
 						TitledBorder.LEADING, TitledBorder.TOP, null, new Color(128, 128, 128)));
@@ -364,7 +368,7 @@ public class ConsoleGUI extends JFrame {
 		pnlGraph.setLayout(null);
 
 		// Définit le JPanel des bornes nominales
-		pnlBounds.setBounds(340, 484, 355, 124);
+		pnlBounds.setBounds(340, 575, 355, 124);
 		pnlBounds.setBorder(new TitledBorder(null, "D\u00E9bord des valeurs nominales", TitledBorder.LEADING,
 				TitledBorder.TOP, null, Color.GRAY));
 		pnlBounds.setBackground(UIManager.getColor("Label.background"));
@@ -402,7 +406,7 @@ public class ConsoleGUI extends JFrame {
 		allStadiums = getAllStadiums();
 
 		JComboBox<String> stadeChoix = new JComboBox();
-		stadeChoix.setBounds(299, 40, 228, 61);
+		stadeChoix.setBounds(234, 140, 228, 61);
 		getContentPane().add(stadeChoix);
 
 		for (int i = 0; i < allStadiums.size(); i++) {
@@ -424,26 +428,61 @@ public class ConsoleGUI extends JFrame {
 			}
 		});
 
-		JLabel lblNewLabel = new JLabel("New label");
+		JLabel lblNewLabel = new JLabel("Logo");
 		lblNewLabel.setIcon(new ImageIcon(
 				"C:\\Users\\uti311\\Documents\\LocalRepository\\VinciThermoGreen\\img\\Logo_Vinci_Concessions.gif"));
 		lblNewLabel.setBounds(10, 25, 250, 90);
 		getContentPane().add(lblNewLabel);
 
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(
-				new ImageIcon("C:\\Users\\uti311\\Documents\\LocalRepository\\VinciThermoGreen\\img\\userIcon.png"));
-		lblNewLabel_1.setBounds(569, 7, 126, 126);
-		getContentPane().add(lblNewLabel_1);
+		JLabel lbConnecte = new JLabel("Connect\u00E9 en tant que : ");
+		lbConnecte.setBounds(391, 25, 159, 14);
+		getContentPane().add(lbConnecte);
+
+		JLabel lbUsername = new JLabel(username);
+		lbUsername.setBounds(560, 25, 86, 14);
+		getContentPane().add(lbUsername);
+
+		JLabel lbRole = new JLabel();
+		lbRole.setBounds(560, 50, 86, 14);
+		if (role) {
+			lbRole.setText("Administrateur");
+		} else {
+			lbRole.setText("Utilisateur");
+		}
+		getContentPane().add(lbRole);
+
+		JButton btnAdministrer = new JButton("Administrer");
+		btnAdministrer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					admin = new Admin();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnAdministrer.setBounds(414, 50, 107, 23);
+		getContentPane().add(btnAdministrer);
+
+		JButton btnDeconnexion = new JButton("Quitter");
+		btnDeconnexion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnDeconnexion.setBounds(549, 75, 118, 23);
+		getContentPane().add(btnDeconnexion);
 	}
 
 	/**
 	 * Préparation de ConsoleGUI
+	 * 
 	 * @param console
 	 * @throws ParseException
 	 * @throws SQLException
 	 */
-	public void setUp(ConsoleGUI console) throws ParseException, SQLException{
+	public void setUp(ConsoleGUI console) throws ParseException, SQLException {
 		console.updateData("Stade de Paris");
 		// Gestion des mesures
 
@@ -457,10 +496,11 @@ public class ConsoleGUI extends JFrame {
 		scrollPane.setViewportView(laTable);
 		// affiche le graphique
 		console.setChart();
-		
+
 		console.setLocation(100, 100);
 		System.out.println("Création IHM");
 		setVisible(true);
+
 	}
 
 	/**
@@ -767,5 +807,4 @@ public class ConsoleGUI extends JFrame {
 		allStadiums = DataMySQL.getAllStadiums();
 		return allStadiums;
 	}
-
 }

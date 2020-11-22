@@ -15,6 +15,7 @@ public class User {
 	private String name;
 	private String surname;
 	private String email;
+	private boolean role;
 	
 	public String getLogin() {
 		return login;
@@ -46,7 +47,10 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-		
-
-	
+	public boolean getRole() {
+		return role;
+	}
+	public void setRole(boolean role) {
+		this.role = role;
+	}
 }

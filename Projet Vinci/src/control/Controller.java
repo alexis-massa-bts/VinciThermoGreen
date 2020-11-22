@@ -3,6 +3,8 @@ package control;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import dataAccess.DataMySQL;
 import view.ConsoleGUI;
 import view.LoginGUI;
@@ -35,7 +37,7 @@ public class Controller {
 		String tmpPassword = "";
 		try {
 			tmpPassword = DataMySQL.getPassword(login);
-			if (tmpPassword.compareTo(password) == 0) {
+			if (BCrypt.checkpw(password, tmpPassword)) {
 				correct = true;
 			} else {
 				correct = false;
@@ -47,5 +49,4 @@ public class Controller {
 		return correct;
 
 	}
-
 }

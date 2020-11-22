@@ -1,7 +1,10 @@
 package view;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 
@@ -13,6 +16,7 @@ import java.text.ParseException;
 import java.awt.event.MouseAdapter;
 
 import control.Controller;
+import dataAccess.DataMySQL;
 
 public class LoginGUI extends JFrame {
 
@@ -21,6 +25,7 @@ public class LoginGUI extends JFrame {
 
 	private static String login;
 	private static String password;
+	private static String username;
 
 	private Controller control = new Controller();
 
@@ -39,7 +44,7 @@ public class LoginGUI extends JFrame {
 		labelLogin.setBounds(216, 172, 62, 22);
 		panel.add(labelLogin);
 
-		tfPassword = new JTextField();
+		tfPassword = new JPasswordField();
 		tfPassword.setColumns(10);
 		tfPassword.setBounds(284, 203, 150, 20);
 		panel.add(tfPassword);
@@ -66,10 +71,11 @@ public class LoginGUI extends JFrame {
 						setVisible(false);
 
 						// Instance console
-						ConsoleGUI console = new ConsoleGUI();
+						username = DataMySQL.getUsername(login);
+						ConsoleGUI console = new ConsoleGUI(username, DataMySQL.getRole(login));
 						console.setUp(console);
 					} else {
-
+						JOptionPane.showMessageDialog(panel, "Login ou Mot de passe incorrect !");
 					}
 					;
 				} catch (SQLException e1) {
@@ -89,7 +95,7 @@ public class LoginGUI extends JFrame {
 	}
 
 	/**
-	 Préparation de LoginGUI
+	 * Préparation de LoginGUI
 	 * @param login
 	 */
 	public void setUp(LoginGUI login) {
