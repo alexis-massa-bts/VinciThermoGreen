@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?PowerDesigner AppLocale="UTF16" ID="{1F24AFFB-2C2E-47E1-8275-DAEE4BCAA35C}" Label="" LastModificationDate="1604328497" Name="VinciThermoGreen" Objects="22" Symbols="0" Type="{FF4B6538-9856-42CF-B9B9-304ED370CEAA}" signature="PRJ_MODEL_XML" version="16.6.10.6261"?>
+<?PowerDesigner AppLocale="UTF16" ID="{1F24AFFB-2C2E-47E1-8275-DAEE4BCAA35C}" Label="" LastModificationDate="1606140915" Name="VinciThermoGreen" Objects="26" Symbols="1" Type="{FF4B6538-9856-42CF-B9B9-304ED370CEAA}" signature="PRJ_MODEL_XML" version="16.6.10.6261"?>
 <!-- Veuillez ne pas modifier ce fichier -->
 
 <Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
@@ -13,7 +13,7 @@
 <a:Code>VinciThermoGreen</a:Code>
 <a:CreationDate>1460096256</a:CreationDate>
 <a:Creator>Prof-SLAM</a:Creator>
-<a:ModificationDate>1604325227</a:ModificationDate>
+<a:ModificationDate>1606140883</a:ModificationDate>
 <a:Modifier>UTI311</a:Modifier>
 <a:PackageOptionsText>[FolderOptions]
 
@@ -220,7 +220,7 @@ ConvTablePath=%_HOME%\Fichiers de ressources\Tables de conversion</a:ModelOption
 <a:Code>Diagramme_1</a:Code>
 <a:CreationDate>1604327005</a:CreationDate>
 <a:Creator>UTI311</a:Creator>
-<a:ModificationDate>1604327005</a:ModificationDate>
+<a:ModificationDate>1606140883</a:ModificationDate>
 <a:Modifier>UTI311</a:Modifier>
 <a:DisplayPreferences>[DisplayPreferences]
 
@@ -566,13 +566,37 @@ Shadow=0</a:DisplayPreferences>
 <a:PageMargins>((315,354), (433,354))</a:PageMargins>
 <a:PageOrientation>1</a:PageOrientation>
 <a:PaperSource>15</a:PaperSource>
+<c:Symbols>
+<o:ModelDocumentSymbol Id="o4">
+<a:CreationDate>1606140883</a:CreationDate>
+<a:ModificationDate>1606140883</a:ModificationDate>
+<a:IconMode>2</a:IconMode>
+<a:Rect>((-1201,-635), (1198,1764))</a:Rect>
+<a:LineColor>12034707</a:LineColor>
+<a:FillColor>16437422</a:FillColor>
+<a:ShadowColor>12632256</a:ShadowColor>
+<a:FontList>OBJSTRN 0 Arial,8,N
+DISPNAME 0 Arial,8,N
+LABL 0 Arial,8,N</a:FontList>
+<a:BrushStyle>6</a:BrushStyle>
+<a:GradientFillMode>65</a:GradientFillMode>
+<a:CustomPictureType>4</a:CustomPictureType>
+<a:CustomTextMode>1</a:CustomTextMode>
+<a:CustomPictureID>0E6F2106-DDD6-4127-BE4B-BD0F910A71B6</a:CustomPictureID>
+<a:GradientEndColor>16777215</a:GradientEndColor>
+<a:KeepAspect>1</a:KeepAspect>
+<c:Object>
+<o:ModelDocument Ref="o5"/>
+</c:Object>
+</o:ModelDocumentSymbol>
+</c:Symbols>
 </o:ProjectDiagram>
 </c:ProjectDiagrams>
 <c:DefaultDiagram>
 <o:ProjectDiagram Ref="o3"/>
 </c:DefaultDiagram>
 <c:DependencyLinks>
-<o:DependencyLink Id="o4">
+<o:DependencyLink Id="o6">
 <a:ObjectID>2622C3F9-D309-4779-84AD-029800B44ECF</a:ObjectID>
 <a:CreationDate>1600092481</a:CreationDate>
 <a:Creator>UTI311</a:Creator>
@@ -580,28 +604,28 @@ Shadow=0</a:DisplayPreferences>
 <a:Modifier>UTI311</a:Modifier>
 <a:DependencyLink.Type>Generation</a:DependencyLink.Type>
 <c:InfluentObjects>
-<o:ModelDocument Ref="o5"/>
+<o:ModelDocument Ref="o7"/>
 </c:InfluentObjects>
 <c:DependentObjects>
-<o:ModelDocument Ref="o6"/>
+<o:ModelDocument Ref="o8"/>
 </c:DependentObjects>
 </o:DependencyLink>
 </c:DependencyLinks>
 <c:ModelsAndFiles>
-<o:ModelDocument Id="o7">
+<o:ModelDocument Id="o9">
 <a:ObjectID>72385486-0556-425A-AD80-C1D9EF0DED4E</a:ObjectID>
 <a:Name>v.2.0.0</a:Name>
 <a:Code>v_2_0_0</a:Code>
 <a:CreationDate>1598347785</a:CreationDate>
 <a:Creator>jvalenti</a:Creator>
-<a:ModificationDate>1604327068</a:ModificationDate>
+<a:ModificationDate>1606140915</a:ModificationDate>
 <a:Modifier>UTI311</a:Modifier>
 <a:Location>file:///%[PRJ_ROOT_DIR]%/Cas_Utilisation.moo</a:Location>
 <a:Extension>moo</a:Extension>
 <a:ModelDocument.ModelID>85E6FBAD-86B8-43A2-9750-69A1AF3D6051</a:ModelDocument.ModelID>
 <a:ModelClassID>18112060-1A4B-11D1-83D9-444553540000</a:ModelClassID>
 </o:ModelDocument>
-<o:ModelDocument Id="o6">
+<o:ModelDocument Id="o8">
 <a:ObjectID>DBE3DCA0-CD3B-4E97-B24E-CC145CFFD565</a:ObjectID>
 <a:Name>v.3.0.0</a:Name>
 <a:Code>v_3_0_0</a:Code>
@@ -614,7 +638,7 @@ Shadow=0</a:DisplayPreferences>
 <a:ModelDocument.ModelID>9CC60EEB-3627-471C-85C1-A696FAEA615F</a:ModelDocument.ModelID>
 <a:ModelClassID>18112060-1A4B-11D1-83D9-444553540000</a:ModelClassID>
 </o:ModelDocument>
-<o:ModelDocument Id="o5">
+<o:ModelDocument Id="o7">
 <a:ObjectID>495691C7-36E3-4683-87FD-4C7629489822</a:ObjectID>
 <a:Name>v.3.0.0</a:Name>
 <a:Code>V_3_0_0</a:Code>
@@ -627,7 +651,7 @@ Shadow=0</a:DisplayPreferences>
 <a:ModelDocument.ModelID>5E4532B5-9FD1-416E-BC7B-BD393CE38E55</a:ModelDocument.ModelID>
 <a:ModelClassID>CDE44E21-9669-11D1-9914-006097355D9B</a:ModelClassID>
 </o:ModelDocument>
-<o:ModelDocument Id="o8">
+<o:ModelDocument Id="o10">
 <a:ObjectID>004D9E08-AB8D-467B-BEA9-1932425F4917</a:ObjectID>
 <a:Name>v.3.1.0</a:Name>
 <a:Code>v_3_1_0</a:Code>
@@ -638,6 +662,19 @@ Shadow=0</a:DisplayPreferences>
 <a:Location>file:///%[PRJ_ROOT_DIR]%/v3.1/v.3.1.0.moo</a:Location>
 <a:Extension>moo</a:Extension>
 <a:ModelDocument.ModelID>A768EEAF-0110-4DF4-B065-1C89FF67E2D5</a:ModelDocument.ModelID>
+<a:ModelClassID>18112060-1A4B-11D1-83D9-444553540000</a:ModelClassID>
+</o:ModelDocument>
+<o:ModelDocument Id="o5">
+<a:ObjectID>A7EB1467-36EA-4A2F-A962-08AD9A4DD54D</a:ObjectID>
+<a:Name>v.3.2.0</a:Name>
+<a:Code>v_3_2_0</a:Code>
+<a:CreationDate>1606140883</a:CreationDate>
+<a:Creator>UTI311</a:Creator>
+<a:ModificationDate>1606140905</a:ModificationDate>
+<a:Modifier>UTI311</a:Modifier>
+<a:Location>file:///%[PRJ_ROOT_DIR]%/v3.2/v.3.1.0.moo</a:Location>
+<a:Extension>moo</a:Extension>
+<a:ModelDocument.ModelID>22110AFC-5029-4CA8-8728-7DB6D9C334D2</a:ModelDocument.ModelID>
 <a:ModelClassID>18112060-1A4B-11D1-83D9-444553540000</a:ModelClassID>
 </o:ModelDocument>
 </c:ModelsAndFiles>

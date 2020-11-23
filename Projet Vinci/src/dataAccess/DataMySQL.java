@@ -208,4 +208,20 @@ public class DataMySQL {
 		}
 	}
 
+	public static int getMin(String selectedStadium) throws SQLException {
+		myStmt = myConn.createStatement();
+		myRs = myStmt.executeQuery("select temp_min from stade where nom_stade = '" + selectedStadium + "'");
+		myRs.next();
+		int min = myRs.getInt("temp_min");
+		return min;
+	}
+
+	public static int getMax(String selectedStadium) throws SQLException {
+		myStmt = myConn.createStatement();
+		myRs = myStmt.executeQuery("select temp_max from stade where nom_stade = '" + selectedStadium + "'");
+		myRs.next();
+		int max = myRs.getInt("temp_max");
+		return max;
+	}
+
 }

@@ -94,7 +94,6 @@ public class Admin extends JFrame {
 				String surname = tfSurname.getText();
 				String password = tfPassword.getText();
 				String email = tfEmail.getText();
-				System.out.println(chckbxRole.isSelected());
 				boolean role = chckbxRole.isSelected();
 				
 				try {
@@ -155,15 +154,14 @@ public class Admin extends JFrame {
 		ResultSet tmpUsers = DataMySQL.getAllUsers();
 		while (tmpUsers.next()) {
 			User unUser = new User();
-			unUser.setLogin(tmpUsers.getString(1));
-			unUser.setName(tmpUsers.getString(3));
-			unUser.setSurname(tmpUsers.getString(4));
-			unUser.setEmail(tmpUsers.getString(5));
-			unUser.setRole(tmpUsers.getBoolean(6));
+			unUser.setLogin(tmpUsers.getString("login"));
+			unUser.setName(tmpUsers.getString("name"));
+			unUser.setSurname(tmpUsers.getString("surname"));
+			unUser.setEmail(tmpUsers.getString("email"));
+			unUser.setRole(tmpUsers.getBoolean("role"));
 			allUsers.add(unUser);
 		}
-
-		System.out.println(Arrays.deepToString(dataTable));
+		
 		table = setTable(dataTable);
 		
 		//CE TABLEAU N'AFFICHE RIEN, JE NE SAIS PAS POURQUOI

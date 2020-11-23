@@ -16,7 +16,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.ListIterator;
+import java.util.Map;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -64,6 +68,8 @@ public class ConsoleGUI extends JFrame {
 	private static ArrayList<String> allStadiums = new ArrayList<String>();
 	private Controller control = new Controller();
 	private Admin admin;
+	private int minSlider;
+	private int maxSlider;
 
 	/**
 	 * <p>
@@ -213,7 +219,7 @@ public class ConsoleGUI extends JFrame {
 		setLocation(-357, -248);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("img\\vinci_ico.jpg"));
 		setTitle("Vinci Thermo Green");
-		setSize(717, 756);
+		setSize(781, 811);
 		setResizable(false);
 		setFont(new Font("Consolas", Font.PLAIN, 12));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -224,7 +230,7 @@ public class ConsoleGUI extends JFrame {
 		getContentPane().setLayout(null);
 
 		// Définit le JPanel des critères
-		pnlCriteria.setBounds(10, 233, 325, 145);
+		pnlCriteria.setBounds(10, 267, 325, 145);
 		pnlCriteria.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Filtrage",
 				TitledBorder.LEADING, TitledBorder.TOP, null, Color.GRAY));
 		pnlCriteria.setBackground(UIManager.getColor("Label.background"));
@@ -295,11 +301,11 @@ public class ConsoleGUI extends JFrame {
 		pnlCriteria.add(lblLogoVinci);
 
 		// Définit le JScrollPane qui reçoit la JTable
-		scrollPane.setBounds(10, 389, 325, 310);
+		scrollPane.setBounds(10, 423, 325, 348);
 		pane.add(scrollPane);
 
 		// Définit le JPanel des paramètres du graphique
-		pnlParam.setBounds(340, 236, 355, 328);
+		pnlParam.setBounds(410, 267, 355, 309);
 		pnlParam.setBorder(
 				new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Graphique des temp\u00E9ratures",
 						TitledBorder.LEADING, TitledBorder.TOP, null, new Color(128, 128, 128)));
@@ -327,78 +333,45 @@ public class ConsoleGUI extends JFrame {
 
 		JLabel lblMin = new JLabel("Min");
 		lblMin.setFont(new Font("Consolas", Font.PLAIN, 12));
-		lblMin.setBounds(15, 306, 30, 14);
+		lblMin.setBounds(15, 278, 30, 14);
 		pnlParam.add(lblMin);
 
 		tempMin = new JTextField();
 		tempMin.setEditable(false);
-		tempMin.setBounds(55, 302, 50, 20);
+		tempMin.setBounds(55, 274, 50, 20);
 		pnlParam.add(tempMin);
 		tempMin.setColumns(10);
 
 		JLabel lblMoy = new JLabel("Moy");
 		lblMoy.setFont(new Font("Consolas", Font.PLAIN, 12));
-		lblMoy.setBounds(137, 304, 30, 14);
+		lblMoy.setBounds(137, 276, 30, 14);
 		pnlParam.add(lblMoy);
 
 		tempMoy = new JTextField();
 		tempMoy.setEditable(false);
 		tempMoy.setColumns(10);
-		tempMoy.setBounds(177, 300, 50, 20);
+		tempMoy.setBounds(177, 272, 50, 20);
 		pnlParam.add(tempMoy);
 
 		JLabel lblMax = new JLabel("Max");
 		lblMax.setFont(new Font("Consolas", Font.PLAIN, 12));
-		lblMax.setBounds(252, 304, 30, 14);
+		lblMax.setBounds(252, 276, 30, 14);
 		pnlParam.add(lblMax);
 
 		tempMax = new JTextField();
 		tempMax.setEditable(false);
 		tempMax.setColumns(10);
-		tempMax.setBounds(292, 300, 50, 20);
+		tempMax.setBounds(292, 272, 50, 20);
 		pnlParam.add(tempMax);
 
 		// Définit le JPanel qui recoit le graphique
 		pnlGraph.setBorder(new TitledBorder(null, "Graphique", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pnlGraph.setBackground(UIManager.getColor("Label.background"));
-		pnlGraph.setBounds(15, 75, 330, 215);
+		pnlGraph.setBounds(15, 75, 330, 186);
 
 		// pose le pnlGraph dans le pnlParam
 		pnlParam.add(pnlGraph);
 		pnlGraph.setLayout(null);
-
-		// Définit le JPanel des bornes nominales
-		pnlBounds.setBounds(340, 575, 355, 124);
-		pnlBounds.setBorder(new TitledBorder(null, "D\u00E9bord des valeurs nominales", TitledBorder.LEADING,
-				TitledBorder.TOP, null, Color.GRAY));
-		pnlBounds.setBackground(UIManager.getColor("Label.background"));
-		pnlBounds.setLayout(null);
-		pane.add(pnlBounds);
-
-		JButton btnDebord = new JButton("D\u00E9bord");
-		btnDebord.setBounds(266, 15, 79, 23);
-		pnlBounds.add(btnDebord);
-
-		JSlider slider = new JSlider();
-		slider.setBounds(16, 40, 240, 25);
-		pnlBounds.add(slider);
-
-		JSlider slider_1 = new JSlider();
-		slider_1.setBounds(15, 88, 240, 25);
-		pnlBounds.add(slider_1);
-
-		JLabel lblDebordMin = new JLabel("Minimum");
-		lblDebordMin.setBounds(15, 20, 60, 14);
-		pnlBounds.add(lblDebordMin);
-
-		JLabel lblDebordMaximum = new JLabel("Maximum");
-		lblDebordMaximum.setBounds(15, 70, 60, 14);
-		pnlBounds.add(lblDebordMaximum);
-
-		JLabel lbAlerte = new JLabel();
-		lbAlerte.setIcon(new ImageIcon("img\\s_green_button.png"));
-		lbAlerte.setBounds(270, 42, 75, 75);
-		pnlBounds.add(lbAlerte);
 
 		/*
 		 * Get list of stadiums from controller
@@ -421,12 +394,72 @@ public class ConsoleGUI extends JFrame {
 					// displayLesMesures(lesMesures);
 					laTable = setTable(lesMesures);
 					scrollPane.setViewportView(laTable);
+					minSlider = DataMySQL.getMin((String) stadeChoix.getSelectedItem());
+					maxSlider = DataMySQL.getMin((String) stadeChoix.getSelectedItem());
 				} catch (ParseException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		});
+
+		// Définit le JPanel des bornes nominales
+		pnlBounds.setBounds(410, 587, 355, 184);
+		pnlBounds.setBorder(new TitledBorder(null, "D\u00E9bord des valeurs nominales", TitledBorder.LEADING,
+				TitledBorder.TOP, null, Color.GRAY));
+		pnlBounds.setBackground(UIManager.getColor("Label.background"));
+		pnlBounds.setLayout(null);
+		pane.add(pnlBounds);
+
+		JButton btnDebord = new JButton("D\u00E9bord");
+		btnDebord.setBounds(262, 26, 79, 23);
+		pnlBounds.add(btnDebord);
+
+		Hashtable<Integer, JLabel> labels = new Hashtable<Integer, JLabel>();
+		labels.put(1, new JLabel("51"));
+		labels.put(2, new JLabel("52"));
+		labels.put(3, new JLabel("53"));
+		labels.put(4, new JLabel("54"));
+
+		minSlider = DataMySQL.getMin((String) stadeChoix.getSelectedItem());
+		maxSlider = DataMySQL.getMin((String) stadeChoix.getSelectedItem());
+		
+		JSlider sliderMin = new JSlider();
+		sliderMin.setMajorTickSpacing(1);
+		sliderMin.setSnapToTicks(true);
+		sliderMin.setPaintLabels(true);
+		sliderMin.setPaintTicks(true);
+		sliderMin.setValue(minSlider);
+		sliderMin.setMaximum(55);
+		sliderMin.setMinimum(50);
+		sliderMin.setLabelTable(labels);
+		sliderMin.setBounds(17, 55, 240, 43);
+		pnlBounds.add(sliderMin);
+		
+		JSlider sliderMax = new JSlider();
+		sliderMax.setMajorTickSpacing(1);
+		sliderMax.setSnapToTicks(true);
+		sliderMax.setPaintLabels(true);
+		sliderMax.setPaintTicks(true);
+		sliderMax.setValue(maxSlider);
+		sliderMax.setMaximum(55);
+		sliderMax.setMinimum(50);
+		sliderMin.setLabelTable(labels);
+		sliderMax.setBounds(17, 130, 240, 43);
+		pnlBounds.add(sliderMax);
+
+		JLabel lblDebordMin = new JLabel("Minimum (\u00B0F)");
+		lblDebordMin.setBounds(17, 30, 87, 14);
+		pnlBounds.add(lblDebordMin);
+
+		JLabel lblDebordMaximum = new JLabel("Maximum (\u00B0F)");
+		lblDebordMaximum.setBounds(17, 109, 79, 14);
+		pnlBounds.add(lblDebordMaximum);
+
+		JLabel lbAlerte = new JLabel();
+		lbAlerte.setIcon(new ImageIcon("img\\s_green_button.png"));
+		lbAlerte.setBounds(266, 55, 75, 75);
+		pnlBounds.add(lbAlerte);
 
 		JLabel lblNewLabel = new JLabel("Logo");
 		lblNewLabel.setIcon(new ImageIcon(
@@ -435,15 +468,15 @@ public class ConsoleGUI extends JFrame {
 		getContentPane().add(lblNewLabel);
 
 		JLabel lbConnecte = new JLabel("Connect\u00E9 en tant que : ");
-		lbConnecte.setBounds(391, 25, 159, 14);
+		lbConnecte.setBounds(489, 25, 159, 14);
 		getContentPane().add(lbConnecte);
 
 		JLabel lbUsername = new JLabel(username);
-		lbUsername.setBounds(560, 25, 86, 14);
+		lbUsername.setBounds(658, 25, 86, 14);
 		getContentPane().add(lbUsername);
 
 		JLabel lbRole = new JLabel();
-		lbRole.setBounds(560, 50, 86, 14);
+		lbRole.setBounds(658, 50, 86, 14);
 		if (role) {
 			lbRole.setText("Administrateur");
 		} else {
@@ -462,7 +495,7 @@ public class ConsoleGUI extends JFrame {
 				}
 			}
 		});
-		btnAdministrer.setBounds(414, 50, 107, 23);
+		btnAdministrer.setBounds(512, 50, 107, 23);
 		getContentPane().add(btnAdministrer);
 
 		JButton btnDeconnexion = new JButton("Quitter");
@@ -471,7 +504,7 @@ public class ConsoleGUI extends JFrame {
 				dispose();
 			}
 		});
-		btnDeconnexion.setBounds(549, 75, 118, 23);
+		btnDeconnexion.setBounds(647, 75, 118, 23);
 		getContentPane().add(btnDeconnexion);
 	}
 
@@ -692,7 +725,7 @@ public class ConsoleGUI extends JFrame {
 //			System.out.println(
 //					"Filtrer Celsius : " + rdbtnCelsius.isSelected() + " Fahrenheit : " + rdbtnFahrenheit.isSelected()
 //							+ " choix : " + choixZone.getSelectedItem() + " début : " + dateDebut.getText());
-			displayLesMesures(lesMesures);
+			//displayLesMesures(lesMesures);
 
 			// Construit le tableau d'objet
 			laTable = setTable(lesMesures);
