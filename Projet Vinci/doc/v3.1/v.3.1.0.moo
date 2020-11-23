@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?PowerDesigner AppLocale="UTF16" ID="{A768EEAF-0110-4DF4-B065-1C89FF67E2D5}" Label="" LastModificationDate="1604328497" Name="v.3.1.0" Objects="105" Symbols="13" Target="Java" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="16.6.10.6261"?>
+<?PowerDesigner AppLocale="UTF16" ID="{A768EEAF-0110-4DF4-B065-1C89FF67E2D5}" Label="" LastModificationDate="1604328497" Name="v.3.1.0" Objects="91" Symbols="6" Target="Java" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="16.6.10.6261"?>
 <!-- Veuillez ne pas modifier ce fichier -->
 
 <Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
@@ -2003,10 +2003,10 @@ Shadow=0</a:DisplayPreferences>
 <c:Symbols>
 <o:DependencySymbol Id="o9">
 <a:CreationDate>1604327269</a:CreationDate>
-<a:ModificationDate>1604327384</a:ModificationDate>
-<a:CenterTextOffset>(-300, 3521)</a:CenterTextOffset>
-<a:Rect>((-2412,4599), (13540,18859))</a:Rect>
-<a:ListOfPoints>((13140,18459),(4238,10537),(-2012,4999))</a:ListOfPoints>
+<a:ModificationDate>1606140314</a:ModificationDate>
+<a:CenterTextOffset>(-1875, 3370)</a:CenterTextOffset>
+<a:Rect>((-74,4824), (9040,20884))</a:Rect>
+<a:ListOfPoints>((8640,20484),(4238,10537),(2788,5224))</a:ListOfPoints>
 <a:ArrowStyle>8</a:ArrowStyle>
 <a:LineColor>128</a:LineColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -2024,9 +2024,9 @@ Shadow=0</a:DisplayPreferences>
 </o:DependencySymbol>
 <o:UseCaseAssociationSymbol Id="o13">
 <a:CreationDate>1604327269</a:CreationDate>
-<a:ModificationDate>1604327269</a:ModificationDate>
-<a:Rect>((-19422,5408), (-5530,7333))</a:Rect>
-<a:ListOfPoints>((-19022,6933),(-19022,5808),(-5930,5808))</a:ListOfPoints>
+<a:ModificationDate>1606140288</a:ModificationDate>
+<a:Rect>((-17452,6173), (-2507,6973))</a:Rect>
+<a:ListOfPoints>((-17052,6573),(-2907,6573))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>0</a:ArrowStyle>
 <a:LineColor>128</a:LineColor>
@@ -2064,9 +2064,9 @@ DISPNAME 0 Arial,8,N</a:FontList>
 </o:ActorSymbol>
 <o:UseCaseSymbol Id="o11">
 <a:CreationDate>1604327269</a:CreationDate>
-<a:ModificationDate>1604327269</a:ModificationDate>
+<a:ModificationDate>1606140288</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
-<a:Rect>((-7707,3649), (-507,9048))</a:Rect>
+<a:Rect>((-2907,3874), (4293,9273))</a:Rect>
 <a:ShadowStyle>1</a:ShadowStyle>
 <a:LineColor>128</a:LineColor>
 <a:LineWidth>1</a:LineWidth>
@@ -2084,9 +2084,9 @@ LABL 0 Arial,8,N</a:FontList>
 </o:UseCaseSymbol>
 <o:UseCaseSymbol Id="o10">
 <a:CreationDate>1604327269</a:CreationDate>
-<a:ModificationDate>1604327322</a:ModificationDate>
+<a:ModificationDate>1606140307</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
-<a:Rect>((9832,14109), (18295,19508))</a:Rect>
+<a:Rect>((5332,16134), (13795,21533))</a:Rect>
 <a:ShadowStyle>1</a:ShadowStyle>
 <a:LineColor>128</a:LineColor>
 <a:LineWidth>1</a:LineWidth>
