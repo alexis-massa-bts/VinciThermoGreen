@@ -169,7 +169,7 @@ public class DataMySQL {
 	 * Hashe un mot de passe
 	 * 
 	 * @param password_plaintext
-	 * @return heshed_password : Le mot de passe hashé
+	 * @return hashed_password : Le mot de passe hashé
 	 */
 	public static String hashPassword(String password_plaintext) {
 		String salt = BCrypt.gensalt();
@@ -212,16 +212,28 @@ public class DataMySQL {
 		myStmt = myConn.createStatement();
 		myRs = myStmt.executeQuery("select temp_min from stade where nom_stade = '" + selectedStadium + "'");
 		myRs.next();
-		int min = myRs.getInt("temp_min");
-		return min;
+		return myRs.getInt("temp_min");
 	}
 
 	public static int getMax(String selectedStadium) throws SQLException {
 		myStmt = myConn.createStatement();
 		myRs = myStmt.executeQuery("select temp_max from stade where nom_stade = '" + selectedStadium + "'");
 		myRs.next();
-		int max = myRs.getInt("temp_max");
-		return max;
+		return myRs.getInt("temp_max");
+	}
+
+	public static void setDebord(int min, int max, String selectedStadium) throws SQLException {
+		myStmt = myConn.createStatement();
+		myStmt.executeUpdate("update stade set temp_max =" + max + ", temp_min =" + min + " where nom_stade = '"
+				+ selectedStadium + "'");
+
+	}
+
+	public static String getMail(String login) throws SQLException {
+		myStmt = myConn.createStatement();
+		myRs = myStmt.executeQuery("select email from user where login = amassa");
+		myRs.next();
+		return myRs.getString("email");
 	}
 
 }

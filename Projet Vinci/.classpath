@@ -20,5 +20,6 @@
 	<classpathentry kind="lib" path="C:/Users/uti311/Documents/LocalRepository/VinciThermoGreen/Projet Vinci/lib/bcrypt/bytes-0.4.6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/uti311/Documents/LocalRepository/VinciThermoGreen/Projet Vinci/lib/bcrypt/jBCrypt-0.4.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/uti311/Documents/LocalRepository/VinciThermoGreen/Projet Vinci/lib/jfreechart-1.0.19/lib/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="C:/Users/uti311/Documents/LocalRepository/VinciThermoGreen/Projet Vinci/lib/mail/javax.mail.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

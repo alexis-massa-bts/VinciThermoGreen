@@ -29,6 +29,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -385,7 +386,6 @@ public class ConsoleGUI extends JFrame {
 		for (int i = 0; i < allStadiums.size(); i++) {
 			stadeChoix.addItem(allStadiums.get(i));
 		}
-
 		// Change data when stadeChoix updated
 		stadeChoix.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -395,7 +395,7 @@ public class ConsoleGUI extends JFrame {
 					laTable = setTable(lesMesures);
 					scrollPane.setViewportView(laTable);
 					minSlider = DataMySQL.getMin((String) stadeChoix.getSelectedItem());
-					maxSlider = DataMySQL.getMin((String) stadeChoix.getSelectedItem());
+					maxSlider = DataMySQL.getMax((String) stadeChoix.getSelectedItem());
 				} catch (ParseException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -411,19 +411,23 @@ public class ConsoleGUI extends JFrame {
 		pnlBounds.setLayout(null);
 		pane.add(pnlBounds);
 
-		JButton btnDebord = new JButton("D\u00E9bord");
-		btnDebord.setBounds(262, 26, 79, 23);
-		pnlBounds.add(btnDebord);
-
 		Hashtable<Integer, JLabel> labels = new Hashtable<Integer, JLabel>();
 		labels.put(1, new JLabel("51"));
 		labels.put(2, new JLabel("52"));
 		labels.put(3, new JLabel("53"));
 		labels.put(4, new JLabel("54"));
 
+		JLabel lblDebordMin = new JLabel("Minimum (\u00B0F)");
+		lblDebordMin.setBounds(17, 30, 87, 14);
+		pnlBounds.add(lblDebordMin);
+
+		JLabel lblDebordMaximum = new JLabel("Maximum (\u00B0F)");
+		lblDebordMaximum.setBounds(17, 109, 79, 14);
+		pnlBounds.add(lblDebordMaximum);
+
 		minSlider = DataMySQL.getMin((String) stadeChoix.getSelectedItem());
-		maxSlider = DataMySQL.getMin((String) stadeChoix.getSelectedItem());
-		
+		maxSlider = DataMySQL.getMax((String) stadeChoix.getSelectedItem());
+
 		JSlider sliderMin = new JSlider();
 		sliderMin.setMajorTickSpacing(1);
 		sliderMin.setSnapToTicks(true);
@@ -435,7 +439,7 @@ public class ConsoleGUI extends JFrame {
 		sliderMin.setLabelTable(labels);
 		sliderMin.setBounds(17, 55, 240, 43);
 		pnlBounds.add(sliderMin);
-		
+
 		JSlider sliderMax = new JSlider();
 		sliderMax.setMajorTickSpacing(1);
 		sliderMax.setSnapToTicks(true);
@@ -448,13 +452,35 @@ public class ConsoleGUI extends JFrame {
 		sliderMax.setBounds(17, 130, 240, 43);
 		pnlBounds.add(sliderMax);
 
-		JLabel lblDebordMin = new JLabel("Minimum (\u00B0F)");
-		lblDebordMin.setBounds(17, 30, 87, 14);
-		pnlBounds.add(lblDebordMin);
+		JButton btnDebord = new JButton("D\u00E9bord");
+		btnDebord.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int min = sliderMin.getValue();
+				int max = sliderMax.getValue();
+				if (min < max) {
+					try {
+						DataMySQL.setDebord(min, max, (String) stadeChoix.getSelectedItem());
+						JOptionPane.showMessageDialog(pnlBounds, "Débord mis à jour !");
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				} else {
+					JOptionPane.showMessageDialog(pnlBounds, "Min >= Max !");
+				}
+			}
+		});
+		btnDebord.setBounds(262, 26, 79, 23);
+		pnlBounds.add(btnDebord);
 
-		JLabel lblDebordMaximum = new JLabel("Maximum (\u00B0F)");
-		lblDebordMaximum.setBounds(17, 109, 79, 14);
-		pnlBounds.add(lblDebordMaximum);
+		JButton btnSlider = new JButton("Actualiser");
+		btnSlider.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				sliderMin.setValue(minSlider);
+				sliderMax.setValue(maxSlider);
+			}
+		});
+		btnSlider.setBounds(163, 26, 89, 23);
+		pnlBounds.add(btnSlider);
 
 		JLabel lbAlerte = new JLabel();
 		lbAlerte.setIcon(new ImageIcon("img\\s_green_button.png"));
@@ -725,7 +751,7 @@ public class ConsoleGUI extends JFrame {
 //			System.out.println(
 //					"Filtrer Celsius : " + rdbtnCelsius.isSelected() + " Fahrenheit : " + rdbtnFahrenheit.isSelected()
 //							+ " choix : " + choixZone.getSelectedItem() + " début : " + dateDebut.getText());
-			//displayLesMesures(lesMesures);
+			// displayLesMesures(lesMesures);
 
 			// Construit le tableau d'objet
 			laTable = setTable(lesMesures);
