@@ -22,6 +22,7 @@ import java.util.Hashtable;
 import java.util.ListIterator;
 import java.util.Map;
 
+import javax.mail.MessagingException;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -44,6 +45,8 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+
+import com.twilio.Twilio;
 
 import control.*;
 import dataAccess.*;
@@ -396,7 +399,8 @@ public class ConsoleGUI extends JFrame {
 					scrollPane.setViewportView(laTable);
 					minSlider = DataMySQL.getMin((String) stadeChoix.getSelectedItem());
 					maxSlider = DataMySQL.getMax((String) stadeChoix.getSelectedItem());
-				} catch (ParseException | SQLException e1) {
+					verifDebord(minSlider, maxSlider, (String) stadeChoix.getSelectedItem());
+				} catch (ParseException | SQLException | MessagingException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -532,6 +536,17 @@ public class ConsoleGUI extends JFrame {
 		});
 		btnDeconnexion.setBounds(647, 75, 118, 23);
 		getContentPane().add(btnDeconnexion);
+	}
+
+	protected void verifDebord(int minSlider, int maxSlider, String stade) throws SQLException, MessagingException {
+		for (Mesure mesure : lesMesures) {
+			if(mesure.getFahrenheit()<(float) minSlider || mesure.getFahrenheit()>(float) maxSlider) {
+				//Mail du destinataire à récupérer dans la base de donnée. Ici, je mets mon mail pour m'envoyer le mail à moi-même.
+				MailUtil.sendMail("alexis2massa@gmail.com", stade);
+				//SMS du destinataire à récupérer dans la base de donnée. Ici, je mets mon numéro pour m'envoyer le SMS à moi-même.
+				SmsUtil.sendSMS("+3368813760" ,stade);
+			}
+		}
 	}
 
 	/**
