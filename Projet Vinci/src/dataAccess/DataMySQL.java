@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
 
@@ -231,9 +232,22 @@ public class DataMySQL {
 
 	public static String getMail(String login) throws SQLException {
 		myStmt = myConn.createStatement();
-		myRs = myStmt.executeQuery("select email from user where login = amassa");
+		myRs = myStmt.executeQuery("select email from user where login = '" + login + "'");
 		myRs.next();
 		return myRs.getString("email");
+	}
+
+	public static void addAlerte(String stade, Date date, String tel) throws SQLException {
+		myStmt = myConn.createStatement();
+		myRs = myStmt.executeQuery("select name, surname from user where phone =  '" + tel + "'");
+		myRs.next();
+		String name = myRs.getString("name");
+		String surname = myRs.getString("surname");
+		String destinataire = name+"-"+surname;
+		myRs = myStmt.executeQuery("select id_stade from stade where nom_stade =  '" + stade + "'");
+		myRs.next();
+		int stade2 = myRs.getInt("id_stade");
+		myStmt.executeUpdate("insert ignore into alerte values(" + stade2 +",'" + date + "','" + destinataire +"')");
 	}
 
 }

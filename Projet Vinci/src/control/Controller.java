@@ -12,21 +12,25 @@ import view.LoginGUI;
 public class Controller {
 
 	private static LoginGUI login;
+
 	/**
 	 * MAIN de l'application
+	 * 
 	 * @param args
 	 * @throws ParseException
 	 * @throws SQLException
 	 */
 	public static void main(String[] args) throws ParseException, SQLException {
+
 		DataMySQL.openConnection();
 
 		login = new LoginGUI();
 		login.setUp(login);
 	}
-	
+
 	/**
 	 * Vérifier la connection
+	 * 
 	 * @param login
 	 * @param password
 	 * @return

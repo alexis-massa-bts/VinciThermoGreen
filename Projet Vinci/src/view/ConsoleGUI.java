@@ -68,6 +68,11 @@ import java.sql.*;
  */
 public class ConsoleGUI extends JFrame {
 
+	
+	SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+	Date date = new Date();
+	
+	
 	private static ArrayList<Mesure> allData = new ArrayList<Mesure>();
 	private static ArrayList<String> allStadiums = new ArrayList<String>();
 	private Controller control = new Controller();
@@ -542,9 +547,14 @@ public class ConsoleGUI extends JFrame {
 		for (Mesure mesure : lesMesures) {
 			if(mesure.getFahrenheit()<(float) minSlider || mesure.getFahrenheit()>(float) maxSlider) {
 				//Mail du destinataire à récupérer dans la base de donnée. Ici, je mets mon mail pour m'envoyer le mail à moi-même.
-				MailUtil.sendMail("alexis2massa@gmail.com", stade);
+				//MailUtil.sendMail("alexis2massa@gmail.com", stade);
 				//SMS du destinataire à récupérer dans la base de donnée. Ici, je mets mon numéro pour m'envoyer le SMS à moi-même.
-				SmsUtil.sendSMS("+3368813760" ,stade);
+				//SmsUtil.sendSMS("+33688137360" ,stade);
+				//Ajouter une alerte dans la BDD
+				date = new Date(System.currentTimeMillis());
+				DataMySQL.addAlerte(stade, date, "+33688137360");
+				JOptionPane.showMessageDialog(pnlBounds, "Alerte envoyée !");
+				return;
 			}
 		}
 	}
