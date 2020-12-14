@@ -13,8 +13,20 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.PasswordAuthentication;
 
+/**
+ * Classe d'envoi de mails
+ * @author Alexis Massa
+ * @version 1.0.0
+ */
 public class MailUtil {
 
+	/**
+	 * Envoies un mail
+	 * @param recipient : Le destinataire
+	 * @param stadeConcerne : le stade concerné
+	 * @throws SQLException
+	 * @throws MessagingException
+	 */
 	public static void sendMail(String recipient, String stadeConcerne) throws SQLException, MessagingException {
 		Properties props = new Properties();
 
@@ -39,6 +51,14 @@ public class MailUtil {
 		System.out.println("Mail sent");
 	}
 
+	/**
+	 * Prépare l'envoi d'un mail
+	 * @param session
+	 * @param myAccountEmail
+	 * @param recipient
+	 * @param stadeConcerne
+	 * @return
+	 */
 	private static Message prepareMessage(Session session, String myAccountEmail, String recipient, String stadeConcerne) {
 		try {
 			Message message = new MimeMessage(session);

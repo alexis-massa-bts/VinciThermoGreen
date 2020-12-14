@@ -63,7 +63,7 @@ import java.sql.*;
  * 
  * @author Jérôme Valenti
  * @version 2.0.0
- * @see control.ControllerConsole
+ * @see view.consoleGUI
  * @see model.Mesure
  */
 public class ConsoleGUI extends JFrame {
@@ -102,7 +102,7 @@ public class ConsoleGUI extends JFrame {
 
 	/**
 	 * <p>
-	 * Liste de choix d'une zone</>
+	 * Liste de choix d'une zone</p>
 	 * 
 	 * @see JComboBox
 	 */
