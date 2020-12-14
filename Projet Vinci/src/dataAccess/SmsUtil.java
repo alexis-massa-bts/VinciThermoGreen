@@ -12,6 +12,6 @@ public class SmsUtil {
 		Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
 		Message message = Message.creator(new PhoneNumber(recipient), new PhoneNumber("+18312192098"),
-				"Vérifier la température du stade" + stade + " ASAP !").create();
+				"Vérifier la température du stade: " + stade + " ASAP !").create();
 	}
 }

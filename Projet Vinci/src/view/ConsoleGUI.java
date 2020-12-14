@@ -549,7 +549,7 @@ public class ConsoleGUI extends JFrame {
 				//Mail du destinataire à récupérer dans la base de donnée. Ici, je mets mon mail pour m'envoyer le mail à moi-même.
 				//MailUtil.sendMail("alexis2massa@gmail.com", stade);
 				//SMS du destinataire à récupérer dans la base de donnée. Ici, je mets mon numéro pour m'envoyer le SMS à moi-même.
-				//SmsUtil.sendSMS("+33688137360" ,stade);
+				SmsUtil.sendSMS("+33688137360" ,stade);
 				//Ajouter une alerte dans la BDD
 				date = new Date(System.currentTimeMillis());
 				DataMySQL.addAlerte(stade, date, "+33688137360");

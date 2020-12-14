@@ -22,6 +22,7 @@ public class Controller {
 	 */
 	public static void main(String[] args) throws ParseException, SQLException {
 
+				
 		DataMySQL.openConnection();
 
 		login = new LoginGUI();

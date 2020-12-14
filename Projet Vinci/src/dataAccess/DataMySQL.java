@@ -204,7 +204,7 @@ public class DataMySQL {
 			JOptionPane.showMessageDialog(null, "Un utilisateur portant ce nom existe déjà !");
 		} else {
 			myStmt.executeUpdate("insert ignore into user values('" + login + "','" + hashPassword(password) + "','"
-					+ name + "','" + surname + "','" + email + "'," + role + ")");
+					+ name + "','" + surname + "',' ','" + email + "'," + role + ")");
 			JOptionPane.showMessageDialog(null, "L'utilisateur a été ajouté ! Son login est : " + login);
 		}
 	}
