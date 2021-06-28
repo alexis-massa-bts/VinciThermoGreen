@@ -30,7 +30,7 @@ public class Controller {
 	}
 
 	/**
-	 * Vérifier la connection
+	 * Vérifier la connexion
 	 * 
 	 * @param login
 	 * @param password
